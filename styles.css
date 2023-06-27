@@ -1,0 +1,34 @@
+h1 {
+    background: red;
+}
+
+.paragraph-1 {
+    background: blue;
+    font-size: 37pt;
+    color: greenyellow;
+}
+
+.paragraph-2 {
+    border: 10px solid sandybrown;
+    font-size: 24pt;
+    border-radius: 5px;
+    margin-bottom: 60px;
+    padding-left: 20px;
+}
+
+.paragraph-3 {
+    font-weight: bold;
+    font-size: 22px;
+    color: seagreen;
+    font-family: Courier New;
+}
+.paragraph-4 {
+    font-size: 24pt;
+    font-style:italic;
+    text-align: center;
+    text-shadow: 3px 3px 3px green;
+}
+.picture{
+    width: 900px;
+}
+
