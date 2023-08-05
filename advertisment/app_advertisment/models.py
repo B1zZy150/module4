@@ -34,6 +34,6 @@ class Advertisement(models.Model):
         return f'Advertisement (id = {self.id}, title = {self.title}, price = {self.price})'
  
     class Meta:
-       db_table = u'Advertisement'
+       db_table = 'Advertisement'
 
     
