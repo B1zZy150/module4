@@ -16,7 +16,7 @@ class Advertisement(models.Model):
     created_ad = models.DateTimeField('Дата и время создания',auto_now_add=True)
     updated_ad = models.DateTimeField('Дата и время редактирования',auto_now=True)
     user = models.ForeignKey(User, verbose_name='Пользователь', on_delete=models.CASCADE)
-    image = models.ImageField('Изображение', upload_to='advertisements/', null=True, blank=True)
+    image = models.ImageField('Изображение', upload_to='advertisements/')
 
     @admin.display(description='Дата создания')
     def created_date(self):
