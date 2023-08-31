@@ -1,8 +1,11 @@
 from django.shortcuts import render,redirect
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.contrib.auth import authenticate, login, logout
 from  .forms import RegisterFrom
-from .models import Profile
+
+from django.contrib.auth.decorators import login_required
+
+
 
 def login_view(request):
     redirect_url = reverse('main_page')
@@ -20,6 +23,7 @@ def login_view(request):
         return redirect(redirect_url)
     return render(request, 'app_auth/login.html')
 
+@login_required(login_url=reverse_lazy('login'))
 def profile_view(request):
     return render(request, 'app_auth/profile.html')
 
@@ -27,22 +31,18 @@ def logout_view(request):
     logout(request)
     return redirect(reverse('login'))
 
+
 def register_view(request):
-    if request.method == 'POST':
-        form = RegisterFrom(request.POST) 
-        if form.is_valid(): 
-            form.save()
-
-            
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password1')
-            
-            user = authenticate(username=username, password=password)
-            login(request, user)
-
-            url = reverse('main_page')
-            return redirect(url) 
-    else: 
-        form = RegisterFrom() 
-    context = {'form':form} 
-    return render(request, 'app_auth/register.html', context) 
+    if request.method == "POST":
+        form = RegisterFrom(request.POST)
+        if form.is_valid():
+            user = form.save()
+            user = authenticate(username=user.username, password=request.POST['password1'])
+            login(request, user=user)
+            return redirect(reverse('profile'))
+    else:
+        form = RegisterFrom()
+    context = {
+        'form': form
+    }
+    return render(request, 'app_auth/register.html', context)
